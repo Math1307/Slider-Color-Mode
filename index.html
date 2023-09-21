@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Página 1</title>
+
+    <label class="switch">
+        <input type="checkbox" id="colorChecker" onclick="changeColorMode()">
+        <span class="slider"></span>
+    </label>
+
+    <link rel="stylesheet" href="./styles/css.css">
+</head>
+
+<body>
+
+    <script>
+
+        var root = document.querySelector(':root')
+        function nightMode() {
+            root.style.setProperty('--background', '#181818')
+            root.style.setProperty('--font-color', 'white')
+        }
+
+        function lightMode() {
+            root.style.setProperty('--background', '#fff')
+            root.style.setProperty('--font-color', 'black')
+        }
+
+
+        var colorMode = 0
+        function changeColorMode() {
+            if (colorMode == 0) {
+                colorMode = 1;
+                localStorage.setItem('colorMode', 1)
+                nightMode()
+            } else {
+                colorMode = 0
+                localStorage.setItem('colorMode', 0)
+                lightMode()
+            }
+        }
+
+        window.onload = function (e) {
+            var storedColorMode = localStorage.getItem('colorMode');
+
+            if (storedColorMode == 1) {
+                changeColorMode()
+                document.getElementById('colorChecker').checked = true;
+            }
+        }
+    </script>
+</body>
+
+</html>
